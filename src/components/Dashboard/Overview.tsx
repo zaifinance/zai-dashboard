@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React from 'react'
-import styled from '@emotion/styled'
-import { jsx, css, useTheme } from '@emotion/react'
-import { rem, transparentize } from 'polished'
+import React from "react";
+import styled from "@emotion/styled";
+import { jsx, css, useTheme } from "@emotion/react";
+import { rem, transparentize } from "polished";
 
 import {
   Bold,
@@ -10,16 +10,16 @@ import {
   Spacer,
   Col,
   slickText,
-} from '../../components/Elements'
-import { Wrapper } from '../../components/Layout'
+} from "../../components/Elements";
+import { Wrapper } from "../../components/Layout";
 
-import { formatBN } from '../../utils/number'
-import { useEpoch, usePrices, useTokenData } from '../../hooks'
-import BigNumber from 'bignumber.js'
-import { LogoMark } from '../../components/Logo'
-import { Themed, ThemeProps } from '../../components/Theme'
-import { DaiSymbol } from '../../components/Icons'
-import Figure from '../../components/Figure'
+import { formatBN } from "../../utils/number";
+import { useEpoch, usePrices, useTokenData } from "../../hooks";
+import BigNumber from "bignumber.js";
+import { LogoMark } from "../../components/Logo";
+import { Themed, ThemeProps } from "../../components/Theme";
+import { DaiSymbol } from "../../components/Icons";
+import Figure from "../../components/Figure";
 
 const Title = styled<Themed>(Bold)`
   color: ${(props) => transparentize(0.3, props.theme.textColor)};
@@ -29,7 +29,7 @@ const Title = styled<Themed>(Bold)`
   @media only screen and (max-width: 520px) {
     color: ${(props) => transparentize(0.5, props.theme.textColor)};
   }
-`
+`;
 
 const SupplyTitle = styled(Title)`
   font-size: ${rem(42)};
@@ -43,12 +43,12 @@ const SupplyTitle = styled(Title)`
   @media only screen and (max-width: 520px) {
     color: ${(props) => props.theme.colorPairs[0].start};
   }
-`
+`;
 
 const Label = styled<Themed>(LabelBase)`
   margin-bottom: ${rem(4)};
   color: ${(props) => transparentize(0.7, props.theme.textColor)};
-`
+`;
 
 const WhiteLabel = styled(Label)`
   color: rgba(255, 255, 255, 0.5);
@@ -57,35 +57,35 @@ const WhiteLabel = styled(Label)`
     opacity: 0.3;
     color: ${(props) => props.theme.textColor};
   }
-`
+`;
 
 const Block = styled(Col)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const EpochTime = () => {
-  const { epochTime } = useEpoch()
-  return <span>{epochTime}</span>
-}
+  const { epochTime } = useEpoch();
+  return <span>{epochTime}</span>;
+};
 
 const DashboardOverview = () => {
-  const theme = useTheme() as ThemeProps
-  const { spotPrice } = usePrices()
+  const theme = useTheme() as ThemeProps;
+  const { spotPrice } = usePrices();
 
-  const { totalTokens, totalNet } = useTokenData()
+  const { totalTokens, totalNet } = useTokenData();
 
   function limit(delta, price) {
-    const l = new BigNumber(0.03)
-    return delta.gt(l) ? l : delta
+    const l = new BigNumber(0.03);
+    return delta.gt(l) ? l : delta;
   }
 
-  let expansion = new BigNumber(0)
+  let expansion = new BigNumber(0);
   if (totalNet && spotPrice) {
-    const delta = limit(spotPrice.minus(1), spotPrice)
+    const delta = limit(spotPrice.minus(1), spotPrice);
     // console.log(delta.toString())
-    expansion = delta.times(totalNet)
+    expansion = delta.times(totalNet);
   }
 
   // marketCap = {totalTokens &&
@@ -166,7 +166,7 @@ const DashboardOverview = () => {
                 height: ${rem(20)};
               `}
             />
-            {spotPrice && formatBN(spotPrice, 2)}
+            {spotPrice && formatBN(spotPrice, 4)}
           </Title>
           <Spacer size={40} />
         </Block>
@@ -216,7 +216,7 @@ const DashboardOverview = () => {
               font-size: ${rem(20)};
             `}
           >
-            {expansion.gt(0) || true ? 'Expansion' : 'Debt'}
+            {expansion.gt(0) || true ? "Expansion" : "Debt"}
           </Title>
           <Spacer size={24} />
         </Block>
@@ -246,7 +246,7 @@ const DashboardOverview = () => {
         </Block>
       </Wrapper>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default DashboardOverview
+export default DashboardOverview;
