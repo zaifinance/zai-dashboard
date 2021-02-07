@@ -72,7 +72,7 @@ const Stats = () => {
   const poolStagedZai = stagedPercentOfPool.times(pairBalanceZai)
 
   const supplyText =
-    twapPrice.gt(1) || true
+    twapPrice.gt(1)
       ? 'total supply will expand by'
       : 'protocol debt will increase by'
 

@@ -216,7 +216,7 @@ const DashboardOverview = () => {
               font-size: ${rem(20)};
             `}
           >
-            {expansion.gt(0) || true ? "Expansion" : "Debt"}
+            {expansion.gt(0) ? "Expansion" : "Debt"}
           </Title>
           <Spacer size={24} />
         </Block>
